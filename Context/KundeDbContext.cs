@@ -7,6 +7,7 @@ namespace TANE.Kunde.Api.Context
     {
         public KundeDbContext(DbContextOptions<KundeDbContext> options) : base(options) { }
 
+        // 🔹 Konfiguration af DbContext
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

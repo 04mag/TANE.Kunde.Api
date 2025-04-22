@@ -35,7 +35,7 @@ namespace TANE.Kunde.Api.REPO
             }
             catch (DbUpdateConcurrencyException)
             {
-                throw new Exception("Kunden blev ændret af en anden, genlæs siden og prøv igen.");
+                throw new DbUpdateConcurrencyException("Kunden blev ændret af en anden, genlæs siden og prøv igen.");
             }
         }
 
