@@ -1,8 +1,3 @@
-﻿
-using Microsoft.EntityFrameworkCore;
-using TANE.Kunde.Api.Context;
-using TANE.Kunde.Api.REPO.Interface;
-using TANE.Kunde.Api.REPO;
 
 namespace TANE.Kunde.Api
 {
@@ -12,32 +7,16 @@ namespace TANE.Kunde.Api
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // 🔹Add DbContext med connection string
-            builder.Services.AddDbContext<KundeDbContext>(options =>
-            {
-                options.UseSqlServer(Environment.GetEnvironmentVariable("DATABASE_CONNECTION_STRING") ?? builder.Configuration.GetConnectionString("DefaultConnection"));
-            });
+            // Add services to the container.
 
-            // 🔹Create database
-            using (var scope = builder.Services.BuildServiceProvider().CreateScope())
-            {
-                var context = scope.ServiceProvider.GetRequiredService<KundeDbContext>();
-                context.Database.EnsureCreated();
-            }
-
-            // 🔹Add REPO
-            builder.Services.AddScoped<IKundeREPO, KundeREPO>();
-
-
-            // 🔹Add services to the container.
             builder.Services.AddControllers();
-            // 🔹Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
             var app = builder.Build();
 
-            // 🔹Configure the HTTP request pipeline.
+            // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
