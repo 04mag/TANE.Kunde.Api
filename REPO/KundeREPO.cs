@@ -28,9 +28,17 @@ namespace TANE.Kunde.Api.REPO
         }
         public async Task UpdateKundeAsync(KundeModel kunde)
         {
-            _context.Kunder.Update(kunde);
-            await _context.SaveChangesAsync();
+            try
+            {
+                _context.Kunder.Update(kunde);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                throw new Exception("Kunden blev ændret af en anden, genlæs siden og prøv igen.");
+            }
         }
+
         public async Task DeleteKundeAsync(int id)
         {
             var kunde = await GetKundeByIdAsync(id);

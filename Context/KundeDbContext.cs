@@ -10,10 +10,11 @@ namespace TANE.Kunde.Api.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<KundeModel>().ToTable("Kunde");
-
+            modelBuilder.Entity<KundeModel>()
+                    .ToTable("Kunde")
+                    .Property(k => k.RowVersion)
+                    .IsRowVersion();
         }
-
         public DbSet<KundeModel> Kunder { get; set; } = null!;
     }
 }
