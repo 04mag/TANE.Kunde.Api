@@ -17,5 +17,6 @@ namespace TANE.Kunde.Api.Context
                     .IsRowVersion();
         }
         public DbSet<KundeModel> Kunder { get; set; } = null!;
+
     }
 }

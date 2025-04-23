@@ -6,8 +6,8 @@ namespace TANE.Kunde.Api.REPO.Interface
     {
         Task<List<KundeModel>> GetAllKunderAsync();
         Task<KundeModel> GetKundeByIdAsync(int id);
-        Task AddKundeAsync(KundeModel kunde);
-        Task UpdateKundeAsync(KundeModel kunde);
-        Task DeleteKundeAsync(int id);
+        Task<KundeModel> AddKundeAsync(KundeModel kunde);
+        Task<KundeModel> UpdateKundeAsync(KundeModel kunde);
+        Task<bool> DeleteKundeAsync(int id);
     }
 }

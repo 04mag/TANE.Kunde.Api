@@ -21,17 +21,20 @@ namespace TANE.Kunde.Api.REPO
         {
             return await _context.Kunder.FindAsync(id);
         }
-        public async Task AddKundeAsync(KundeModel kunde)
+        public async Task<KundeModel> AddKundeAsync(KundeModel kunde)
         {
-            await _context.Kunder.AddAsync(kunde);
+            var resultat = await _context.Kunder.AddAsync(kunde);
             await _context.SaveChangesAsync();
+            return resultat.Entity;
         }
-        public async Task UpdateKundeAsync(KundeModel kunde)
+        public async Task<KundeModel> UpdateKundeAsync(KundeModel kunde)
         {
             try
             {
-                _context.Kunder.Update(kunde);
+                var resulat = _context.Kunder.Update(kunde);
                 await _context.SaveChangesAsync();
+                return resulat.Entity; 
+
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -39,14 +42,16 @@ namespace TANE.Kunde.Api.REPO
             }
         }
 
-        public async Task DeleteKundeAsync(int id)
+        public async Task<bool> DeleteKundeAsync(int id)
         {
             var kunde = await GetKundeByIdAsync(id);
             if (kunde != null)
             {
                 _context.Kunder.Remove(kunde);
                 await _context.SaveChangesAsync();
+                return true;
             }
+            return false;
         }
     }
 }

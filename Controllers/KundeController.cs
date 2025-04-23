@@ -39,8 +39,9 @@ namespace TANE.Kunde.Api.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState); // 400 Bad Request
 
-            await _kundeRepo.AddKundeAsync(kunde);
-            return Ok(); // 200 OK
+            var resultat = await _kundeRepo.AddKundeAsync(kunde);
+            return Ok(resultat); // 200 OK
+
         }
 
         [HttpPut]
@@ -51,8 +52,8 @@ namespace TANE.Kunde.Api.Controllers
 
             try
             {
-                await _kundeRepo.UpdateKundeAsync(kunde);
-                return Ok(); // 200 OK
+                var resultat = await _kundeRepo.UpdateKundeAsync(kunde);
+                return Ok(resultat); // 200 OK
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -63,8 +64,9 @@ namespace TANE.Kunde.Api.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {
-            await _kundeRepo.DeleteKundeAsync(id);
-            return Ok(); // 200 OK
+            var resultat = await _kundeRepo.DeleteKundeAsync(id);
+            if(resultat) return Ok(); // 200 OK
+            else return NotFound(); // 404 NotFound
         }
     }
 }

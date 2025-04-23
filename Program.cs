@@ -48,7 +48,6 @@ namespace TANE.Kunde.Api
 
             app.UseAuthorization();
 
-
             app.MapControllers();
 
             app.Run();
