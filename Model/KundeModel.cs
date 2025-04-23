@@ -12,12 +12,17 @@ namespace TANE.Kunde.Api.Model
         [Required]
         [StringLength(50)]
         public string Efternavn { get; set; }
+
+        [MaxLength(20)]
+        public string? TlfNummer { get; set; }
         [Required]
         [EmailAddress]
-        public string Email { get; set; }
+        public string? Email { get; set; }
         [Timestamp]
-        public byte[] RowVersion { get; set; } = null!;
+        public byte[]? RowVersion { get; set; }
+        
         public KundeModel() { }
+
         public KundeModel(int id, string forNavn, string efterNavn, string email)
         {
             Id = id;

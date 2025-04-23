@@ -42,14 +42,16 @@ namespace TANE.Kunde.Api.REPO
             }
         }
 
-        public async Task DeleteKundeAsync(int id)
+        public async Task<bool> DeleteKundeAsync(int id)
         {
             var kunde = await GetKundeByIdAsync(id);
             if (kunde != null)
             {
                 _context.Kunder.Remove(kunde);
                 await _context.SaveChangesAsync();
+                return true;
             }
+            return false;
         }
     }
 }
