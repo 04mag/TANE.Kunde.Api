@@ -21,17 +21,20 @@ namespace TANE.Kunde.Api.REPO
         {
             return await _context.Kunder.FindAsync(id);
         }
-        public async Task AddKundeAsync(KundeModel kunde)
+        public async Task<KundeModel> AddKundeAsync(KundeModel kunde)
         {
-            await _context.Kunder.AddAsync(kunde);
+            var resultat = await _context.Kunder.AddAsync(kunde);
             await _context.SaveChangesAsync();
+            return resultat.Entity;
         }
-        public async Task UpdateKundeAsync(KundeModel kunde)
+        public async Task<KundeModel> UpdateKundeAsync(KundeModel kunde)
         {
             try
             {
-                _context.Kunder.Update(kunde);
+                var resulat = _context.Kunder.Update(kunde);
                 await _context.SaveChangesAsync();
+                return resulat.Entity; 
+
             }
             catch (DbUpdateConcurrencyException)
             {
