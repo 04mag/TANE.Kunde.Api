@@ -48,8 +48,11 @@ namespace TANE.Kunde.Api
 
             app.UseAuthorization();
 
-
             app.MapControllers();
+
+            // 🔹Seed data
+            KundeDbContext.SeedData(app);
+
 
             app.Run();
         }
