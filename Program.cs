@@ -50,10 +50,6 @@ namespace TANE.Kunde.Api
 
             app.MapControllers();
 
-            // 🔹Seed data
-            //KundeDbContext.SeedData(app);
-
-
             app.Run();
         }
     }
