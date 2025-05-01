@@ -22,7 +22,17 @@ namespace TANE.Kunde.Api
             using (var scope = builder.Services.BuildServiceProvider().CreateScope())
             {
                 var context = scope.ServiceProvider.GetRequiredService<KundeDbContext>();
-                context.Database.EnsureCreated();
+
+                try
+                {
+                    context.Database.EnsureCreated();
+                }
+                catch
+                {
+                    //Close app if database creation fails
+                    Console.WriteLine("Database creation failed");
+                    Environment.Exit(1);
+                }
             }
 
             // 🔹Add REPO
